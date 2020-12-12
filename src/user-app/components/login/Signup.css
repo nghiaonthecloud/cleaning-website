@@ -1,0 +1,77 @@
+.signup-clean {
+    background: #f1f7fc;
+    padding: 220px 0;
+}
+
+.signup-clean form {
+    max-width: 500px;
+    width: 90%;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 4px;
+    color: #505e6c;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.signup-clean .illustration {
+    text-align: center;
+    padding: 0 0 20px;
+    font-size: 100px;
+    /*color: rgb(244,71,107);*/
+}
+
+.illustration {
+  margin-bottom: 20px;
+}
+
+.signup-clean .alert {
+  width: 100%;
+  text-align: center;
+  margin: auto auto 20px;
+}
+
+.signup-clean form .form-control {
+    background: #f7f9fc;
+    border: none;
+    border-bottom: 1px solid #dfe7f1;
+    border-radius: 0;
+    box-shadow: none;
+    outline: none;
+    color: inherit;
+    text-indent: 8px;
+    height: 42px;
+}
+
+.signup-clean form .btn-primary {
+    background: #00d8ff;
+    border: none;
+    border-radius: 4px;
+    padding: 11px;
+    box-shadow: none;
+    margin-top: 26px;
+    text-shadow: none;
+    outline: none !important;
+}
+
+.signup-clean form .btn-primary:hover, .signup-clean form .btn-primary:active {
+    background: #00d8d5;
+}
+
+.signup-clean form .btn-primary:active {
+    transform: translateY(1px);
+}
+
+.signup-clean form .forgot {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    color: #6f7a85;
+    opacity: 0.9;
+    text-decoration: none;
+}
+
+.signup-clean form .forgot:hover, .signup-clean form .forgot:active {
+    opacity: 1;
+    text-decoration: none;
+}

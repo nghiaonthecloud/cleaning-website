@@ -1,0 +1,50 @@
+.history-item {
+  background-color: #ffffff;
+  padding: 25px;
+  margin: 15px auto;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.comment {
+  width: 100%;
+  min-height: 100px;
+  height: 100px;
+  padding: 5px;
+  border: groove;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  resize: vertical;
+  max-height: 300px;
+}
+
+.feedback button {
+  width: 30% !important;
+  float: right;
+}
+
+.history-item h4 {
+  margin-bottom: 10px;
+}
+
+.p-no-space {
+  margin: 0px;
+}
+
+.item-content {
+  margin-top: 10px;
+}
+
+*:focus {
+  outline: 0;
+}
+
+.history-item-title {
+  display: flex;
+  align-items: center;
+}
+
+.history-item-title h4 {
+  display: inline-block;
+  margin: auto auto auto 5px;
+}

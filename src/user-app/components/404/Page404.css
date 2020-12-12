@@ -1,0 +1,27 @@
+.mainbox {
+    margin: auto;
+    height: 700px;
+    position: relative;
+}
+
+.smallbox {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translate(0%, -50%);
+}
+
+.err {
+    text-align: center;
+    color: #00d8ff;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 13rem;
+    margin: auto;
+}
+
+.msg {
+    text-align: center;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 3rem;
+    margin: auto;
+}
