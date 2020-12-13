@@ -1,8 +1,59 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
+import Button from "../shared/Button";
 
 class ServiceSection extends Component {
   render() {
+
+    const currencyOptions = {
+      style: 'currency',
+      currency: 'VND',
+      maximumFractionDigits: 0
+    }
+
+    let renderedServices = this.props.services.map(
+      (service) => (
+        <div className="col-md-4 col-sm-6" key={service.id}>
+          <div className="single-package-item">
+            <div className="single-package-item-txt">
+              <h3>{service.name}
+              <span className="pull-right">
+                {parseInt(service.cost).toLocaleString('vi-vn', currencyOptions)}
+              </span>
+              </h3>
+              <div className="packages-para">
+                <table>
+                  <tbody>
+                  <tr>
+                    <td rowSpan={2}><img
+                      src={process.env.PUBLIC_URL + "/images/packages/02.jpg"}
+                      alt=""/>
+                    </td>
+                    <td>
+                      <p>{service.description}</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>50m2</p>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="about-btn">
+                <Link to="/#book">
+                  <Button className="packages-btn">
+                    Đặt ngay
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    );
+
     return (
       <section id="services" className="packages">
         <div className="container">
@@ -12,7 +63,7 @@ class ServiceSection extends Component {
           <div className="gallary-header text-muted">
             <div className="container">
               <p>
-                * Lưu ý:
+                <strong>Lưu ý:</strong>
               </p>
               <ul>
                 <li>
@@ -42,157 +93,42 @@ class ServiceSection extends Component {
 
           <div className="packages-content">
             <div className="row">
-              <div className="col-md-4 col-sm-6">
-                <div className="single-package-item">
-                  <div className="single-package-item-txt">
-                    <h3>gói 2 giờ <span className="pull-right">120,000đ</span>
-                    </h3>
-                    <div className="packages-para">
-                      <table>
-                        <tbody>
-                        <tr>
-                          <td rowSpan={2}><img
-                            src={process.env.PUBLIC_URL + "/images/packages/02.jpg"}
-                            alt=""/>
-                          </td>
-                          <td>
-                            <p>02 phòng</p>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <p>50m2</p>
-                          </td>
-                        </tr>
-                        </tbody>
-                      </table>
-                    </div>
+              {/*<div className="col-md-4 col-sm-6">*/}
+              {/*  <div className="single-package-item">*/}
+              {/*    <div className="single-package-item-txt">*/}
+              {/*      <h3>gói 2 giờ <span className="pull-right">120,000đ</span>*/}
+              {/*      </h3>*/}
+              {/*      <div className="packages-para">*/}
+              {/*        <table>*/}
+              {/*          <tbody>*/}
+              {/*          <tr>*/}
+              {/*            <td rowSpan={2}><img*/}
+              {/*              src={process.env.PUBLIC_URL + "/images/packages/02.jpg"}*/}
+              {/*              alt=""/>*/}
+              {/*            </td>*/}
+              {/*            <td>*/}
+              {/*              <p>02 phòng</p>*/}
+              {/*            </td>*/}
+              {/*          </tr>*/}
+              {/*          <tr>*/}
+              {/*            <td>*/}
+              {/*              <p>50m2</p>*/}
+              {/*            </td>*/}
+              {/*          </tr>*/}
+              {/*          </tbody>*/}
+              {/*        </table>*/}
+              {/*      </div>*/}
+              {/*      <div className="about-btn">*/}
+              {/*        <Link to="/#book">*/}
+              {/*          <button className="about-view packages-btn">Đặt ngay*/}
+              {/*          </button>*/}
+              {/*        </Link>*/}
+              {/*      </div>*/}
+              {/*    </div>*/}
+              {/*  </div>*/}
+              {/*</div>*/}
 
-                    <div className="about-btn">
-                      <Link to="/#book">
-                        <button className="about-view packages-btn">Đặt ngay
-                        </button>
-                      </Link>
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-              <div className="col-md-4 col-sm-6">
-                <div className="single-package-item">
-                  <div className="single-package-item-txt">
-                    <h3>gói 3 giờ <span className="pull-right">120,000đ</span>
-                    </h3>
-                    <div className="packages-para">
-                      <table>
-                        <tbody>
-                        <tr>
-                          <td rowSpan={2}><img
-                            src={process.env.PUBLIC_URL + "/images/packages/03.jpg"}
-                            alt=""/>
-                          </td>
-                          <td>
-                            <p>02 phòng</p>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <p>50m2</p>
-                          </td>
-                        </tr>
-                        </tbody>
-                      </table>
-                    </div>
-
-                    <div className="about-btn">
-                      <Link to="/#book">
-                        <button className="about-view packages-btn">Đặt ngay
-                        </button>
-                      </Link>
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-              <div className="col-md-4 col-sm-6">
-                <div className="single-package-item">
-                  <div className="single-package-item-txt">
-                    <h3>gói 4 giờ <span className="pull-right">120,000đ</span>
-                    </h3>
-                    <div className="packages-para">
-                      <table>
-                        <tbody>
-                        <tr>
-                          <td rowSpan={2}><img
-                            src={process.env.PUBLIC_URL + "/images/packages/04.jpg"}
-                            alt=""/>
-                          </td>
-                          <td>
-                            <p>02 phòng</p>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <p>50m2</p>
-                          </td>
-                        </tr>
-                        </tbody>
-                      </table>
-                    </div>
-
-                    <div className="about-btn">
-                      <Link to="/#book">
-                        <button className="about-view packages-btn">Đặt ngay
-                        </button>
-                      </Link>
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-              <div className="col-md-4 col-sm-6">
-                <div className="single-package-item">
-                  <div className="single-package-item-txt">
-                    <h3>gói 5 giờ <span className="pull-right">120,000đ</span>
-                    </h3>
-                    <div className="packages-para">
-                      <table>
-                        <tbody>
-                        <tr>
-                          <td rowSpan={2}><img
-                            src={process.env.PUBLIC_URL + "/images/packages/05.jpg"}
-                            alt=""/>
-                          </td>
-                          <td>
-                            <p>02 phòng</p>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <p>50m2</p>
-                          </td>
-                        </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <div className="about-btn">
-                      <Link to="/#book">
-                        <button className="about-view packages-btn">Đặt ngay
-                        </button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {renderedServices}
             </div>
           </div>
         </div>

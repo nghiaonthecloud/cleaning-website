@@ -1,4 +1,4 @@
-import {isEmail, isEmpty, isMobilePhone} from "validator";
+import {isEmail, isEmpty, isMobilePhone, isBefore} from "validator";
 import React from "react";
 
 const required = (value) => {
@@ -28,4 +28,11 @@ const minLength = (value) => {
   }
 }
 
-export {required, phone, email, minLength};
+const isAfterToday = (value) => {
+  let today = new Date().toISOString().slice(0, 10)
+  if (isBefore(value, today)) {
+    return <small className="form-text text-danger">Ngày không hợp lệ</small>;
+  }
+}
+
+export {required, phone, email, minLength, isAfterToday};

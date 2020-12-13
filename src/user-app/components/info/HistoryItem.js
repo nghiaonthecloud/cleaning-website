@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import ReactStars from "react-rating-stars-component";
 
 import './HistoryItem.css'
+import BookingService from "../../../services/booking.service";
+import AuthService from "../../../services/auth.service";
 
 const BOOKING_STATUS = {
   NEW: 1,
@@ -9,6 +11,11 @@ const BOOKING_STATUS = {
   DONE: 3,
   CANCELED: 4
 }
+
+/** TODO:
+ * - confirm khi huy
+ * - phan trang
+ */
 
 export class HistoryItem extends Component {
 
@@ -22,7 +29,8 @@ export class HistoryItem extends Component {
     }
 
     this.onRatingChanged = this.onRatingChanged.bind(this);
-
+    this.onCancelBooking = this.onCancelBooking.bind(this);
+    this.onBookAgain = this.onBookAgain.bind(this);
   }
 
   onRatingChanged(newRating) {
@@ -30,6 +38,41 @@ export class HistoryItem extends Component {
       rating: newRating,
       showFeedbackBox: true
     })
+  }
+
+  onCancelBooking(e) {
+    BookingService.cancelBooking(this.props.item.id)
+      .then((res) => {
+        this.setState({
+          loading: false,
+          status: BOOKING_STATUS.CANCELED
+        });
+      })
+      .catch(error => {
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+
+          this.setState({
+            loading: false,
+            hasError: true,
+            message: resMessage
+          });
+        }
+      );
+  }
+
+  onBookAgain(e) {
+    let item = this.props.item;
+    let newLocation = `/?name=${item.name}&phone=${item.phone_number}&address=${item.address}`;
+    item.services.forEach((service) => {
+      newLocation += `&services=${service.id}`;
+    });
+    newLocation += '#book';
+    window.location.replace(newLocation);
   }
 
   render() {
@@ -40,7 +83,7 @@ export class HistoryItem extends Component {
         <div className="col-md-3">
         </div>
         <div className="col-md-3">
-          <button className="btn btn-default" type="button">
+          <button className="btn btn-default" type="button" onClick={this.onCancelBooking}>
             Hủy
           </button>
         </div>
@@ -53,7 +96,7 @@ export class HistoryItem extends Component {
         <div className="col-md-3">
         </div>
         <div className="col-md-3">
-          <button className="btn btn-default btn-active" type="button">
+          <button className="btn btn-default btn-active" onClick={this.onBookAgain} type="button">
             Đặt lại
           </button>
         </div>
@@ -68,7 +111,7 @@ export class HistoryItem extends Component {
           </button>
         </div>
         <div className="col-md-3">
-          <button className="btn btn-default btn-active" type="button">
+          <button className="btn btn-default btn-active" onClick={this.onBookAgain} type="button">
             Đặt lại
           </button>
         </div>
@@ -121,7 +164,8 @@ export class HistoryItem extends Component {
                 {new Date(item.to).toLocaleTimeString('vi-vn', timeOptions)} </small>
             </p>
             <p className="p-no-space">
-              <small>{item.phone_number}</small>
+              <small><strong>{item.name}</strong></small>
+              <br/><small>{item.phone_number}</small>
               <br/><small>{item.address}</small>
             </p>
           </div>
@@ -191,7 +235,7 @@ export class HistoryItem extends Component {
                 </div>
               </div>
             </div>
-          ) : ( hasReviewContent && (
+          ) : (hasReviewContent && (
             <div className="row">
               <div className="feedback">
                 <div className="col-md-12">

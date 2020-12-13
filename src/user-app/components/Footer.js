@@ -19,7 +19,7 @@ export class Footer extends Component {
 
               <div className="col-sm-4">
                 <div className="single-footer-item">
-                  <h2>link</h2>
+                  <h2>Đường dẫn</h2>
                   <div className="single-footer-txt">
                     <p><Link to="/">Giới thiệu</Link></p>
                     <p><Link to="/#promotion">Khuyến mãi</Link></p>
@@ -32,11 +32,11 @@ export class Footer extends Component {
 
               <div className="col-sm-4">
                 <div className="single-footer-item text-center">
-                  <h2 className="text-left">contacts</h2>
+                  <h2 className="text-left">Liên hệ</h2>
                   <div className="single-footer-txt text-left">
                     <p>+84 1234 6543</p>
                     <p className="foot-email">
-                      <Link to="mail://info@houseclean.com">info@houseclean.com</Link>
+                      info@houseclean.com
                     </p>
                     <p>Số 1 Đại Cồ Việt, Hai Bà Trưng</p>
                     <p>Hà Nội, Việt Nam</p>
@@ -50,7 +50,7 @@ export class Footer extends Component {
           <div className="foot-icons">
             <ul className="footer-social-links list-inline list-unstyled">
               <li>
-                <Link href="https://facebook.com" target="_blank" className="foot-icon-bg-1">
+                <Link to="https://facebook.com" target="_blank" className="foot-icon-bg-1">
                   <i className="fa fa-facebook"/>
                 </Link>
               </li>

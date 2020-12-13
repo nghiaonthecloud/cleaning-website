@@ -8,6 +8,9 @@ import {email, minLength, required} from '../shared/Validation';
 
 import "./Login.css";
 
+/** TODO:
+ * - xu ly loi
+ */
 
 export class Login extends Component {
   constructor(props) {
@@ -55,7 +58,6 @@ export class Login extends Component {
         },
         error => {
           console.log(error);
-
           const resMessage =
             (error.response &&
               error.response.data &&

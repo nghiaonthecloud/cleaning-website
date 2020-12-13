@@ -1,7 +1,9 @@
 .signup-clean {
     background: #f1f7fc;
-    padding: 220px 0;
-}
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;}
 
 .signup-clean form {
     max-width: 500px;

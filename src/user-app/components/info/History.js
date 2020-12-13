@@ -4,158 +4,167 @@ import UserService from "../../../services/user.service";
 import {HistoryItem} from './HistoryItem'
 import './History.css';
 import Spinner from "../shared/Spinner";
+import {Link} from "react-router-dom";
 
 const BOOKING_STATUS = {
-    NEW: 1,
-    CONFIRMED: 2,
-    DONE: 3,
-    CANCELED: 4
+  NEW: 1,
+  CONFIRMED: 2,
+  DONE: 3,
+  CANCELED: 4
 }
 
 export class History extends Component {
 
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            isLoading: true,
-            hasError: false,
-            message: "",
-            historyItems: [],
-            filter: null
-        }
-
-        this.onFilter = this.onFilter.bind(this);
+    this.state = {
+      isLoading: true,
+      hasError: false,
+      message: "",
+      historyItems: [],
+      filter: null
     }
 
-    componentDidMount() {
-        UserService.getHistory()
-            .then(res => {
-                this.setState({
-                    isLoading: false,
-                    hasError: false,
-                    historyItems: res.data.data
-                });
-            })
-            .catch(err => {
-                this.setState({
-                    isLoading: false,
-                    hasError: true,
-                    message: err.toString()
-                });
-            })
-    }
+    this.onFilter = this.onFilter.bind(this);
+  }
 
-    onFilter(value) {
+  componentDidMount() {
+    UserService.getHistory()
+      .then(res => {
         this.setState({
-            filter: value
+          isLoading: false,
+          hasError: false,
+          historyItems: res.data.data.reverse()
         });
-    }
+      })
+      .catch(err => {
+        this.setState({
+          isLoading: false,
+          hasError: true,
+          message: err.toString()
+        });
+      })
+  }
 
-    render() {
+  onFilter(value) {
+    this.setState({
+      filter: value
+    });
+  }
 
-        let filteredItems = this.state.historyItems.filter((item) => {
-            if (this.state.filter)
-                return item.status === this.state.filter;
-            return true;
-        })
+  render() {
 
-        return (
-            <div>
-                <div className="intro">
-                    <h2 className="text-left">Lịch sử dịch vụ</h2>
-                    <p className="text-left">Lịch sử các đơn đặt dọn nhà của bạn.</p>
+    let filteredItems = this.state.historyItems.filter((item) => {
+      if (this.state.filter)
+        return item.status === this.state.filter;
+      return true;
+    })
+
+    return (
+      <div>
+        <div className="intro">
+          <h2 className="text-left">Lịch sử dịch vụ</h2>
+          <p className="text-left">Lịch sử các đơn đặt dọn nhà của bạn.</p>
+        </div>
+        <div>
+          <div>
+            <ul className="nav nav-tabs" role="tablist">
+              <li className={"col-md-3 " + ((this.state.filter === null) ? "active" : "")}
+                  role="presentation">
+                <Link className="text-center"
+                   to="/info/history/#tab1"
+                   role="tab"
+                   data-toggle="tab"
+                   onClick={() => this.onFilter(null)}
+                >Tất cả</Link>
+              </li>
+              <li className={"col-md-3 " + ((this.state.filter === BOOKING_STATUS.CONFIRMED) ? "active" : "")}
+                  role="presentation">
+                <Link className="text-center"
+                      to="/info/history/#tab2"
+                      role="tab"
+                      data-toggle="tab"
+                      onClick={() => this.onFilter(BOOKING_STATUS.CONFIRMED)}
+                >Đã đặt lịch</Link>
+              </li>
+              <li className={"col-md-3 " + ((this.state.filter === BOOKING_STATUS.DONE) ? "active" : "")}
+                  role="presentation">
+                <Link className="text-center"
+                   to="/info/history/#tab3"
+                   role="tab"
+                   data-toggle="tab"
+                   onClick={() => this.onFilter(BOOKING_STATUS.DONE)}
+                >Đã hoàn thành</Link>
+              </li>
+              <li className={"col-md-3 " + ((this.state.filter === BOOKING_STATUS.CANCELED) ? "active" : "")}
+                  role="presentation">
+                <Link className="text-center"
+                   to="/info/history/#tab4"
+                   role="tab"
+                   data-toggle="tab"
+                   onClick={() => this.onFilter(BOOKING_STATUS.CANCELED)}
+                >Đã hủy</Link>
+              </li>
+            </ul>
+            <div className="tab-content">
+              <div className="tab-pane active" role="tabpanel" id="tab-1">
+                <div className="tab">
+                  {this.state.isLoading ? (
+                    <Spinner/>
+                  ) : this.state.hasError ? (
+                    <p>{this.state.message}</p>
+                  ) : (filteredItems.map((item) =>
+                    (<HistoryItem item={item} key={item.id}/>)
+                  ))
+                  }
+
+
+                  {/*<Pagination aria-label="Page navigation example">*/}
+                  {/*  <PaginationItem>*/}
+                  {/*    <PaginationLink first href="#" />*/}
+                  {/*  </PaginationItem>*/}
+                  {/*  <PaginationItem>*/}
+                  {/*    <PaginationLink previous href="#" />*/}
+                  {/*  </PaginationItem>*/}
+                  {/*  <PaginationItem>*/}
+                  {/*    <PaginationLink href="#">*/}
+                  {/*      1*/}
+                  {/*    </PaginationLink>*/}
+                  {/*  </PaginationItem>*/}
+                  {/*  <PaginationItem>*/}
+                  {/*    <PaginationLink href="#">*/}
+                  {/*      2*/}
+                  {/*    </PaginationLink>*/}
+                  {/*  </PaginationItem>*/}
+                  {/*  <PaginationItem>*/}
+                  {/*    <PaginationLink href="#">*/}
+                  {/*      3*/}
+                  {/*    </PaginationLink>*/}
+                  {/*  </PaginationItem>*/}
+                  {/*  <PaginationItem>*/}
+                  {/*    <PaginationLink href="#">*/}
+                  {/*      4*/}
+                  {/*    </PaginationLink>*/}
+                  {/*  </PaginationItem>*/}
+                  {/*  <PaginationItem>*/}
+                  {/*    <PaginationLink href="#">*/}
+                  {/*      5*/}
+                  {/*    </PaginationLink>*/}
+                  {/*  </PaginationItem>*/}
+                  {/*  <PaginationItem>*/}
+                  {/*    <PaginationLink next href="#" />*/}
+                  {/*  </PaginationItem>*/}
+                  {/*  <PaginationItem>*/}
+                  {/*    <PaginationLink last href="#" />*/}
+                  {/*  </PaginationItem>*/}
+                  {/*</Pagination>*/}
                 </div>
-                <div>
-                    <div>
-                        <ul className="nav nav-tabs" role="tablist">
-                            <li className="active col-md-3" role="presentation">
-                                <a className="text-center"
-                                   href="#tab-1" role="tab"
-                                   data-toggle="tab"
-                                   onClick={() => this.onFilter(null)}
-                                >Tất cả</a>
-                            </li>
-                            <li role="presentation" className="col-md-3">
-                                <a className="text-center"
-                                   href="#tab-2" role="tab"
-                                   data-toggle="tab"
-                                   onClick={() => this.onFilter(BOOKING_STATUS.CONFIRMED)}
-                                >Đã đặt lịch</a>
-                            </li>
-                            <li role="presentation" className="col-md-3">
-                                <a className="text-center"
-                                   href="#tab-3" role="tab"
-                                   data-toggle="tab"
-                                   onClick={() => this.onFilter(BOOKING_STATUS.DONE)}
-                                >Đã hoàn thành</a>
-                            </li>
-                            <li role="presentation" className="col-md-3">
-                                <a className="text-center"
-                                   href="#tab-4" role="tab"
-                                   data-toggle="tab"
-                                   onClick={() => this.onFilter(BOOKING_STATUS.CANCELED)}
-                                >Đã hủy</a>
-                            </li>
-                        </ul>
-                        <div className="tab-content">
-                            <div className="tab-pane active" role="tabpanel" id="tab-1">
-                                <div className="tab">
-                                    {this.state.isLoading ? (
-                                        <Spinner/>
-                                    ) : this.state.hasError ? (
-                                        <p>{this.state.message}</p>
-                                    ) : (filteredItems.map((item) =>
-                                        (<HistoryItem item={item} key={item.id}/>)
-                                    ))
-                                    }
-
-
-                                    {/*<Pagination aria-label="Page navigation example">*/}
-                                    {/*  <PaginationItem>*/}
-                                    {/*    <PaginationLink first href="#" />*/}
-                                    {/*  </PaginationItem>*/}
-                                    {/*  <PaginationItem>*/}
-                                    {/*    <PaginationLink previous href="#" />*/}
-                                    {/*  </PaginationItem>*/}
-                                    {/*  <PaginationItem>*/}
-                                    {/*    <PaginationLink href="#">*/}
-                                    {/*      1*/}
-                                    {/*    </PaginationLink>*/}
-                                    {/*  </PaginationItem>*/}
-                                    {/*  <PaginationItem>*/}
-                                    {/*    <PaginationLink href="#">*/}
-                                    {/*      2*/}
-                                    {/*    </PaginationLink>*/}
-                                    {/*  </PaginationItem>*/}
-                                    {/*  <PaginationItem>*/}
-                                    {/*    <PaginationLink href="#">*/}
-                                    {/*      3*/}
-                                    {/*    </PaginationLink>*/}
-                                    {/*  </PaginationItem>*/}
-                                    {/*  <PaginationItem>*/}
-                                    {/*    <PaginationLink href="#">*/}
-                                    {/*      4*/}
-                                    {/*    </PaginationLink>*/}
-                                    {/*  </PaginationItem>*/}
-                                    {/*  <PaginationItem>*/}
-                                    {/*    <PaginationLink href="#">*/}
-                                    {/*      5*/}
-                                    {/*    </PaginationLink>*/}
-                                    {/*  </PaginationItem>*/}
-                                    {/*  <PaginationItem>*/}
-                                    {/*    <PaginationLink next href="#" />*/}
-                                    {/*  </PaginationItem>*/}
-                                    {/*  <PaginationItem>*/}
-                                    {/*    <PaginationLink last href="#" />*/}
-                                    {/*  </PaginationItem>*/}
-                                    {/*</Pagination>*/}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              </div>
             </div>
-        );
-    }
+          </div>
+        </div>
+      </div>
+    );
+  }
 }

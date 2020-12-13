@@ -4,12 +4,18 @@ import AuthService from '../../services/auth.service';
 import Button from './shared/Button';
 
 
+const USER_ROLES = {
+  USER: 1,
+  ADMIN: 2,
+}
+
 export class Navbar extends Component {
 
 
   handleLogOut(e) {
     AuthService.logout();
     this.props.setUser(null);
+    window.location.replace('/');
   }
 
   render() {
@@ -45,6 +51,14 @@ export class Navbar extends Component {
                               <Button>Đặt lịch</Button>
                             </Link>
                           </li>
+                          <li>
+                            <Link to="/info">Chào {user.username}</Link>
+                          </li>
+                          {user.role === USER_ROLES.ADMIN && (
+                            <li>
+                              <Link to="/manage">Quản lý</Link>
+                            </li>
+                          )}
                           <li>
                             <Link to="/info">Chào {user.username}</Link>
                           </li>

@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
 const ServiceAd = () => {
   return (
@@ -13,7 +14,7 @@ const ServiceAd = () => {
               </div>
               <div className="service-content">
                 <h2>
-                  <a> siêu tốc </a>
+                  <Link to="/#booking"> siêu tốc </Link>
                 </h2>
                 <p>
                   60 phút có ngay người đến giúp việc nhà.
@@ -30,7 +31,7 @@ const ServiceAd = () => {
               </div>
               <div className="service-content">
                 <h2>
-                  <a> minh bạch </a>
+                  <Link to="/#booking"> minh bạch </Link>
                 </h2>
                 <p>
                   Giá dịch vụ được hiển thị chi tiết, không phí phát sinh.
@@ -46,7 +47,7 @@ const ServiceAd = () => {
               </div>
               <div className="service-content">
                 <h2>
-                  <a href="#"> an toàn </a>
+                  <Link to="/#booking"> an toàn </Link>
                 </h2>
                 <p>Đảm bảo an toàn với gói bảo hiểm cho Khách hàng người giúp
                   việc.</p>

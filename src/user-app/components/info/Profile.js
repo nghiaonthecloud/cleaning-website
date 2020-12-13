@@ -8,6 +8,11 @@ import './Profile.css';
 import AuthService from "../../../services/auth.service";
 
 
+/** TODO:
+ * - autofill
+ * - request update
+ */
+
 export class Profile extends Component {
 
   constructor(props) {
@@ -141,7 +146,7 @@ export class Profile extends Component {
                       <label className="control-label">Họ tên</label>
                       <Input type="text"
                              className="form-control"
-                             onchange={this.onChangeName}
+                             onChange={this.onChangeName}
                              validations={[required]}
                       />
                     </div>
@@ -151,7 +156,7 @@ export class Profile extends Component {
                       <label className="control-label">Số điện thoại</label>
                       <Input type="tel"
                              className="form-control"
-                             onchange={this.onChangePhone}
+                             onChange={this.onChangePhone}
                              validations={[required, phone]}
                       />
                     </div>
@@ -163,7 +168,7 @@ export class Profile extends Component {
                          className="form-control"
                          autoComplete="on"
                          required
-                         onchange={this.onChangeEmail}
+                         onChange={this.onChangeEmail}
                          validations={[required, email]}
                   />
                 </div>
@@ -173,7 +178,7 @@ export class Profile extends Component {
                          className="form-control"
                          autoComplete="off"
                          required
-                         onchange={this.onChangeAddress}
+                         onChange={this.onChangeAddress}
                          validations={[required]}
                   />
                 </div>
@@ -186,7 +191,7 @@ export class Profile extends Component {
                              className="form-control"
                              autoComplete="off"
                              required
-                             onchange={this.onChangePassword}
+                             onChange={this.onChangePassword}
                              validations={[required, minLength]}
                       />
                     </div>
@@ -197,7 +202,7 @@ export class Profile extends Component {
                       <Input type="password"
                              className="form-control"
                              required
-                             onchange={this.onChangeConfirmPassword}
+                             onChange={this.onChangeConfirmPassword}
                              validations={[required, this.passwordMatch]}
                       />
                     </div>

@@ -1,4 +1,6 @@
 import React from 'react';
+import {Link} from "react-router-dom";
+import Button from "../shared/Button";
 
 const AboutUs = () => {
     return (
@@ -18,9 +20,9 @@ const AboutUs = () => {
                                         Đà Lạt, Biên Hòa, Cần Thơ và Bình Dương.
                                         </p>
                                     <div className="about-btn">
-                                        <a href="#book">
-                                            <button className="about-view">Đặt lịch</button>
-                                        </a>
+                                        <Link to="/#book">
+                                            <Button className="about-view">Đặt lịch</Button>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
